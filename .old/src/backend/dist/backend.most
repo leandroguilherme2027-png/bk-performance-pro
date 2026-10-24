@@ -1,0 +1,222 @@
+// Version: 4.0.0
+type AccessControlState__201339279 =
+  {
+    var adminAssigned : Bool;
+    userRoles : Map__230067015<Principal, UserRole__91647283>
+  };
+type AppliedState__453374484 =
+  {applied : Bool; appliedAt : ?Timestamp__265541092};
+type AppliedState__690892017 =
+  {applied : Bool; appliedAt : ?Timestamp__771871407};
+type Data__44217153<K, V> = {var count : Nat__227979830; kvs : [var ?(K, V)]};
+type DpiMode__309984083 = {#current; #recommended; #withoutDpi};
+type DpiMode__700291073 = {#current; #recommended; #withoutDpi};
+type FingerMode__1011442947 = {#custom; #four; #three; #two};
+type FingerMode__90790789 = {#custom; #four; #three; #two};
+type GameId__1043825230 = GameId__669134594;
+type GameId__403140104 = GameId__669134594;
+type GameId__435926964 = Nat;
+type GameId__669134594 = Nat;
+type GameId__855380699 = GameId__669134594;
+type Game__1064918363 =
+  {
+    createdAt : Timestamp__771871407;
+    id : GameId__435926964;
+    isBuiltIn : Bool;
+    name : Text;
+    packageId : ?Text
+  };
+type Game__396010996 =
+  {
+    createdAt : Timestamp__777432769;
+    id : GameId__403140104;
+    isBuiltIn : Bool;
+    name : Text;
+    packageId : ?Text
+  };
+type GraphicsSettings__83066622 =
+  {
+    antiAliasing : Bool;
+    autoAdjustGraphics : Bool;
+    frameRate : Text;
+    graphicsQuality : Text;
+    shadow : Bool
+  };
+type GraphicsSettings__884595641 =
+  {
+    antiAliasing : Bool;
+    autoAdjustGraphics : Bool;
+    frameRate : Text;
+    graphicsQuality : Text;
+    shadow : Bool
+  };
+type Internal__283199666<K, V> =
+  {children : [var ?Node__204828119<K, V>]; data : Data__44217153<K, V>};
+type Leaf__598469445<K, V> = {data : Data__44217153<K, V>};
+type Map__230067015<K, V> = Map__405889023<K, V>;
+type Map__405889023<K, V> = Map__603270868<K, V>;
+type Map__603270868<K, V> =
+  {var root : Node__204828119<K, V>; var size : Nat__227979830};
+type Nat__227979830 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__769816496 =
+  {
+    accessControlState : AccessControlState__201339279;
+    games :
+      Map__230067015<Principal,
+                      Map__230067015<GameId__435926964, Game__1064918363>>;
+    nextGameId : {var value : Nat};
+    nextOptimizationProfileId : {var value : Nat};
+    nextSensitivityProfileId : {var value : Nat};
+    optimizationProfiles :
+      Map__230067015<Principal,
+                      Map__230067015<OptimizationProfileId__105180791,
+                                      OptimizationProfile__448691540>>;
+    sensitivityProfiles :
+      Map__230067015<Principal,
+                      Map__230067015<SensitivityProfileId__930415941,
+                                      SensitivityProfile__642753314>>
+  };
+type Node__204828119<K, V> =
+  {#internal : Internal__283199666<K, V>; #leaf : Leaf__598469445<K, V>};
+type OldActor__512397517 = {};
+type OptimizationOption__255932982 =
+  {enabled : Bool; key : Text; title : Text};
+type OptimizationOption__541177236 =
+  {enabled : Bool; key : Text; title : Text};
+type OptimizationProfileId__105180791 = Nat;
+type OptimizationProfileId__80099357 = Nat;
+type OptimizationProfileId__921964606 = OptimizationProfileId__80099357;
+type OptimizationProfile__448691540 =
+  {
+    applied : AppliedState__690892017;
+    createdAt : Timestamp__771871407;
+    gameId : GameId__435926964;
+    graphics : GraphicsSettings__884595641;
+    id : OptimizationProfileId__105180791;
+    options : [OptimizationOption__541177236];
+    previous : ?PreviousState__611827223;
+    updatedAt : Timestamp__771871407
+  };
+type OptimizationProfile__683124659 =
+  {
+    applied : AppliedState__453374484;
+    createdAt : Timestamp__265541092;
+    gameId : GameId__1043825230;
+    graphics : GraphicsSettings__83066622;
+    id : OptimizationProfileId__921964606;
+    options : [OptimizationOption__255932982];
+    previous : ?PreviousState__809099352;
+    updatedAt : Timestamp__265541092
+  };
+type PlayStyle__62591128 =
+  {#balanced; #closeCombat; #custom; #dragScope; #precision};
+type PlayStyle__665079433 =
+  {#balanced; #closeCombat; #custom; #dragScope; #precision};
+type PreviousState__611827223 =
+  {
+    capturedAt : Timestamp__771871407;
+    graphics : GraphicsSettings__884595641;
+    options : [OptimizationOption__541177236]
+  };
+type PreviousState__809099352 =
+  {
+    capturedAt : Timestamp__265541092;
+    graphics : GraphicsSettings__83066622;
+    options : [OptimizationOption__255932982]
+  };
+type SensitivityProfileId__756758449 = Nat;
+type SensitivityProfileId__856561230 = SensitivityProfileId__756758449;
+type SensitivityProfileId__930415941 = Nat;
+type SensitivityProfile__104874529 =
+  {
+    brand : Text;
+    createdAt : Timestamp__315411828;
+    dpi : ?Nat;
+    dpiMode : DpiMode__700291073;
+    fingerMode : FingerMode__1011442947;
+    gameId : GameId__855380699;
+    id : SensitivityProfileId__856561230;
+    model : Text;
+    playStyle : PlayStyle__665079433;
+    sensitivityType : SensitivityType__411406771;
+    updatedAt : Timestamp__315411828;
+    values : SensitivityValues__858753657
+  };
+type SensitivityProfile__642753314 =
+  {
+    brand : Text;
+    createdAt : Timestamp__771871407;
+    dpi : ?Nat;
+    dpiMode : DpiMode__309984083;
+    fingerMode : FingerMode__90790789;
+    gameId : GameId__435926964;
+    id : SensitivityProfileId__930415941;
+    model : Text;
+    playStyle : PlayStyle__62591128;
+    sensitivityType : SensitivityType__339739118;
+    updatedAt : Timestamp__771871407;
+    values : SensitivityValues__494532375
+  };
+type SensitivityType__339739118 = {#custom; #high; #low; #medium};
+type SensitivityType__411406771 = {#custom; #high; #low; #medium};
+type SensitivityValues__494532375 =
+  {
+    awmScope : Nat;
+    freeLook : Nat;
+    general : Nat;
+    redDot : Nat;
+    scope2x : Nat;
+    scope4x : Nat
+  };
+type SensitivityValues__858753657 =
+  {
+    awmScope : Nat;
+    freeLook : Nat;
+    general : Nat;
+    redDot : Nat;
+    scope2x : Nat;
+    scope4x : Nat
+  };
+type Timestamp__265541092 = Timestamp__301639476;
+type Timestamp__301639476 = Int;
+type Timestamp__315411828 = Timestamp__301639476;
+type Timestamp__771871407 = Int;
+type Timestamp__777432769 = Timestamp__301639476;
+type UserRole__91647283 = {#admin; #guest; #user};
+{
+  "00000000_000000" : OldActor__512397517 -> NewActor__769816496
+}
+actor  {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__230067015<Principal, UserRole__91647283>
+    };
+  stable games :
+    {
+      var root :
+        Node__204828119<Principal,
+                         Map__230067015<GameId__403140104, Game__396010996>>;
+      var size : Nat__227979830
+    };
+  stable nextGameId : {var value : Nat};
+  stable nextOptimizationProfileId : {var value : Nat};
+  stable nextSensitivityProfileId : {var value : Nat};
+  stable optimizationProfiles :
+    {
+      var root :
+        Node__204828119<Principal,
+                         Map__230067015<OptimizationProfileId__921964606,
+                                         OptimizationProfile__683124659>>;
+      var size : Nat__227979830
+    };
+  stable sensitivityProfiles :
+    {
+      var root :
+        Node__204828119<Principal,
+                         Map__230067015<SensitivityProfileId__856561230,
+                                         SensitivityProfile__104874529>>;
+      var size : Nat__227979830
+    }
+};

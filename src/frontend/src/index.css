@@ -1,0 +1,230 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 300 700;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("/assets/fonts/DMSans.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 100 1000;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 100 800;
+}
+
+@layer base {
+  :root {
+    --font-display: "Space Grotesk";
+    --font-body: "DM Sans";
+    --font-mono: "JetBrains Mono";
+    --radius: 0.875rem;
+
+    /* BK PERFORMANCE PRO — dark-first gamer telemetry system.
+       :root mirrors dark values so the app is dark by default. */
+
+    --background: 0.145 0.018 258;
+    --foreground: 0.97 0.005 250;
+
+    --card: 0.19 0.022 258;
+    --card-foreground: 0.97 0.005 250;
+
+    --popover: 0.21 0.024 258;
+    --popover-foreground: 0.97 0.005 250;
+
+    /* Electric blue — primary action */
+    --primary: 0.66 0.19 252;
+    --primary-foreground: 0.99 0.004 250;
+
+    --secondary: 0.24 0.028 258;
+    --secondary-foreground: 0.9 0.008 250;
+
+    --muted: 0.24 0.024 258;
+    --muted-foreground: 0.66 0.014 252;
+
+    /* Plasma cyan — data highlight / active state */
+    --accent: 0.78 0.14 205;
+    --accent-foreground: 0.15 0.018 258;
+
+    --destructive: 0.6 0.21 22;
+    --destructive-foreground: 0.98 0.005 22;
+
+    --success: 0.72 0.17 152;
+    --warning: 0.78 0.15 78;
+
+    --border: 0.3 0.028 256;
+    --input: 0.3 0.028 256;
+    --ring: 0.66 0.19 252;
+
+    /* Telemetry chart series */
+    --chart-1: 0.66 0.19 252; /* electric blue */
+    --chart-2: 0.78 0.14 205; /* plasma cyan */
+    --chart-3: 0.72 0.17 152; /* signal green */
+    --chart-4: 0.78 0.15 78; /* amber */
+    --chart-5: 0.62 0.2 22; /* alert red */
+
+    --sidebar: 0.17 0.02 258;
+    --sidebar-foreground: 0.97 0.005 250;
+    --sidebar-primary: 0.66 0.19 252;
+    --sidebar-primary-foreground: 0.99 0.004 250;
+    --sidebar-accent: 0.24 0.028 258;
+    --sidebar-accent-foreground: 0.9 0.008 250;
+    --sidebar-border: 0.3 0.028 256;
+    --sidebar-ring: 0.66 0.19 252;
+
+    /* Extended tokens */
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.66 0.19 252) 0%,
+      oklch(0.72 0.17 235) 100%
+    );
+    --gradient-header: linear-gradient(
+      180deg,
+      oklch(0.22 0.05 255) 0%,
+      oklch(0.145 0.018 258) 100%
+    );
+    --gradient-surface: linear-gradient(
+      160deg,
+      oklch(0.21 0.026 258) 0%,
+      oklch(0.18 0.02 258) 100%
+    );
+    --transition-smooth: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.16s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 0.145 0.018 258;
+    --foreground: 0.97 0.005 250;
+
+    --card: 0.19 0.022 258;
+    --card-foreground: 0.97 0.005 250;
+
+    --popover: 0.21 0.024 258;
+    --popover-foreground: 0.97 0.005 250;
+
+    --primary: 0.66 0.19 252;
+    --primary-foreground: 0.99 0.004 250;
+
+    --secondary: 0.24 0.028 258;
+    --secondary-foreground: 0.9 0.008 250;
+
+    --muted: 0.24 0.024 258;
+    --muted-foreground: 0.66 0.014 252;
+
+    --accent: 0.78 0.14 205;
+    --accent-foreground: 0.15 0.018 258;
+
+    --destructive: 0.6 0.21 22;
+    --destructive-foreground: 0.98 0.005 22;
+
+    --success: 0.72 0.17 152;
+    --warning: 0.78 0.15 78;
+
+    --border: 0.3 0.028 256;
+    --input: 0.3 0.028 256;
+    --ring: 0.66 0.19 252;
+
+    --chart-1: 0.66 0.19 252;
+    --chart-2: 0.78 0.14 205;
+    --chart-3: 0.72 0.17 152;
+    --chart-4: 0.78 0.15 78;
+    --chart-5: 0.62 0.2 22;
+
+    --sidebar: 0.17 0.02 258;
+    --sidebar-foreground: 0.97 0.005 250;
+    --sidebar-primary: 0.66 0.19 252;
+    --sidebar-primary-foreground: 0.99 0.004 250;
+    --sidebar-accent: 0.24 0.028 258;
+    --sidebar-accent-foreground: 0.9 0.008 250;
+    --sidebar-border: 0.3 0.028 256;
+    --sidebar-ring: 0.66 0.19 252;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    font-feature-settings: "cv11", "ss01";
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Numeric telemetry reads as monospace tabular figures */
+  .font-mono {
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .transition-fast {
+    transition: var(--transition-fast);
+  }
+
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+
+  .bg-gradient-header {
+    background-image: var(--gradient-header);
+  }
+
+  .bg-gradient-surface {
+    background-image: var(--gradient-surface);
+  }
+
+  .text-gradient-primary {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Telemetry-style label: small, uppercase, wide tracking */
+  .label-telemetry {
+    @apply text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground;
+  }
+
+  .shadow-card {
+    box-shadow: 0 1px 0 0 oklch(1 0 0 / 0.04) inset, 0 8px 24px -12px
+      oklch(0.1 0.02 258 / 0.7);
+  }
+
+  .shadow-elevated {
+    box-shadow: 0 1px 0 0 oklch(1 0 0 / 0.05) inset, 0 16px 40px -16px
+      oklch(0.08 0.02 258 / 0.85);
+  }
+
+  .shadow-action {
+    box-shadow: 0 6px 18px -8px oklch(0.66 0.19 252 / 0.55), 0 1px 0 0
+      oklch(1 0 0 / 0.14) inset;
+  }
+}

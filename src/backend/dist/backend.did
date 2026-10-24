@@ -1,0 +1,260 @@
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type UpdateSensitivityProfileRequest = 
+ record {
+   brand: text;
+   dpi: opt nat;
+   dpiMode: DpiMode;
+   fingerMode: FingerMode;
+   id: SensitivityProfileId;
+   model: text;
+   playStyle: PlayStyle;
+   sensitivityType: SensitivityType;
+   values: SensitivityValues;
+ };
+type UpdateGameRequest = 
+ record {
+   id: GameId;
+   isBuiltIn: bool;
+   name: text;
+   packageId: opt text;
+ };
+type Timestamp = int;
+type SensitivityValues = 
+ record {
+   awmScope: nat;
+   freeLook: nat;
+   general: nat;
+   redDot: nat;
+   scope2x: nat;
+   scope4x: nat;
+ };
+type SensitivityType = 
+ variant {
+   custom;
+   high;
+   low;
+   medium;
+ };
+type SensitivityProfileId = nat;
+type SensitivityProfile = 
+ record {
+   brand: text;
+   createdAt: Timestamp;
+   dpi: opt nat;
+   dpiMode: DpiMode;
+   fingerMode: FingerMode;
+   gameId: GameId;
+   id: SensitivityProfileId;
+   model: text;
+   playStyle: PlayStyle;
+   sensitivityType: SensitivityType;
+   updatedAt: Timestamp;
+   values: SensitivityValues;
+ };
+type SaveSensitivityProfileRequest = 
+ record {
+   brand: text;
+   dpi: opt nat;
+   dpiMode: DpiMode;
+   fingerMode: FingerMode;
+   gameId: GameId;
+   model: text;
+   playStyle: PlayStyle;
+   sensitivityType: SensitivityType;
+   values: SensitivityValues;
+ };
+type SaveOptimizationProfileRequest = 
+ record {
+   gameId: GameId;
+   graphics: GraphicsSettings;
+   options: vec OptimizationOption;
+ };
+type Result__1 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type RestoreOptimizationProfileRequest = record {id: OptimizationProfileId;};
+type PreviousState = 
+ record {
+   capturedAt: Timestamp;
+   graphics: GraphicsSettings;
+   options: vec OptimizationOption;
+ };
+type PlayStyle = 
+ variant {
+   balanced;
+   closeCombat;
+   custom;
+   dragScope;
+   precision;
+ };
+type OptimizationProfileId = nat;
+type OptimizationProfile = 
+ record {
+   applied: AppliedState;
+   createdAt: Timestamp;
+   gameId: GameId;
+   graphics: GraphicsSettings;
+   id: OptimizationProfileId;
+   options: vec OptimizationOption;
+   previous: opt PreviousState;
+   updatedAt: Timestamp;
+ };
+type OptimizationOption = 
+ record {
+   enabled: bool;
+   key: text;
+   title: text;
+ };
+type GraphicsSettings = 
+ record {
+   antiAliasing: bool;
+   autoAdjustGraphics: bool;
+   frameRate: text;
+   graphicsQuality: text;
+   shadow: bool;
+ };
+type GeneratedSensitivity = 
+ record {
+   dpi: opt nat;
+   values: SensitivityValues;
+ };
+type GenerateSensitivityRequest = 
+ record {
+   brand: text;
+   dpi: opt nat;
+   dpiMode: DpiMode;
+   model: text;
+   sensitivityType: SensitivityType;
+ };
+type GameId = nat;
+type Game = 
+ record {
+   createdAt: Timestamp;
+   id: GameId;
+   isBuiltIn: bool;
+   name: text;
+   packageId: opt text;
+ };
+type FingerMode = 
+ variant {
+   custom;
+   four;
+   three;
+   two;
+ };
+type Error = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type DpiMode = 
+ variant {
+   current;
+   recommended;
+   withoutDpi;
+ };
+type DeleteSensitivityProfileRequest = record {id: SensitivityProfileId;};
+type DeleteOptimizationProfileRequest = record {id: OptimizationProfileId;};
+type CreateGameRequest = 
+ record {
+   isBuiltIn: bool;
+   name: text;
+   packageId: opt text;
+ };
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+type ApplyOptimizationProfileRequest = record {id: OptimizationProfileId;};
+type AppliedState = 
+ record {
+   applied: bool;
+   appliedAt: opt Timestamp;
+ };
+service : {
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result__1);
+  _internet_identity_sign_in_start: () -> (blob);
+  /// Apply an optimization profile, capturing the previous state.
+  applyOptimizationProfile: (request: ApplyOptimizationProfileRequest) ->
+   (opt OptimizationProfile);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  /// Create a game for the caller.
+  createGame: (request: CreateGameRequest) -> (Game);
+  /// Delete one of the caller's games.
+  deleteGame: (id: GameId) -> (bool);
+  /// Delete one of the caller's optimization profiles.
+  deleteOptimizationProfile: (request: DeleteOptimizationProfileRequest) ->
+   (bool);
+  /// Delete one of the caller's sensitivity profiles.
+  deleteSensitivityProfile: (request: DeleteSensitivityProfileRequest) ->
+   (bool);
+  execute: (qJson: text) -> (Result) query;
+  /// Generate a Free Fire sensitivity from the chosen device, DPI mode and level.
+  generateSensitivity: (request: GenerateSensitivityRequest) ->
+   (GeneratedSensitivity) query;
+  /// Return the backend's API documentation as Markdown.
+  getApiDoc: () -> (text) query;
+  getCallerUserRole: () -> (UserRole) query;
+  isCallerAdmin: () -> (bool) query;
+  /// List the caller's games.
+  listGames: () -> (vec Game) query;
+  /// List the caller's optimization profiles.
+  listOptimizationProfiles: () -> (vec OptimizationProfile) query;
+  /// List the caller's sensitivity profiles.
+  listSensitivityProfiles: () -> (vec SensitivityProfile) query;
+  /// Restore the previous state of an optimization profile.
+  restoreOptimizationProfile: (request: RestoreOptimizationProfileRequest) ->
+   (opt OptimizationProfile);
+  /// Save (create or replace) an optimization profile for the caller.
+  saveOptimizationProfile: (request: SaveOptimizationProfileRequest) ->
+   (OptimizationProfile);
+  /// Save (create or replace) a sensitivity profile for the caller.
+  saveSensitivityProfile: (request: SaveSensitivityProfileRequest) ->
+   (SensitivityProfile);
+  schema: () -> (text) query;
+  /// Update one of the caller's games.
+  updateGame: (request: UpdateGameRequest) -> (opt Game);
+  /// Update one of the caller's sensitivity profiles.
+  updateSensitivityProfile: (request: UpdateSensitivityProfileRequest) ->
+   (opt SensitivityProfile);
+}

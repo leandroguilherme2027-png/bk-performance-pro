@@ -1,0 +1,18 @@
+{
+  "overview": "BK Performance Pro is a gamer utility app that generates Free Fire sensitivity settings for your device and shows live performance metrics.",
+  "features": [
+    "Generate Free Fire sensitivity by device, with or without DPI, high or low",
+    "See the button number and DPI number in the result",
+    "Activate the performance monitor to read FPS, battery, RAM and storage",
+    "Clear 'not available on this device' message instead of fake numbers"
+  ],
+  "category": "gaming-utility",
+  "tags": [
+    "gaming",
+    "free-fire",
+    "sensitivity",
+    "performance",
+    "mobile"
+  ],
+  "last_updated": "2026-10-24T18:31:48.341Z"
+}
